@@ -20,8 +20,6 @@ typedef struct s_philo
     pthread_mutex_t mutex;
 }              t_philo;
 
-
-
 typedef struct s_params
 {
     int philo_num;
