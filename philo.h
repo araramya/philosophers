@@ -16,7 +16,7 @@ typedef struct s_philo
     int right_fork;
     int index;
     int eat_c;
-   // struct s_params *params;
+    struct s_params *params;
     pthread_mutex_t mutex;
 }              t_philo;
 
@@ -29,12 +29,14 @@ typedef struct s_params
     int at_last_eat;
     t_philo *philo;
     pthread_mutex_t *forks;
+    pthread_mutex_t message;
+    pthread_mutex_t is_dead;
+
 
 }              t_params;
 
 long	ft_atoi(const char *str);
 int ft_initilize_params(t_params *params, int argc, char **argv);
-
 int ft_initilize_philo(t_params  *params);
 int ft_initilize_mutex(t_params *params);
 

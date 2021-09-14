@@ -23,6 +23,7 @@ int main(int argc, char **argv)
             || ft_initilize_mutex(params))
             {
                 printf("ERROR! :Initalization failed:");
+                //destroy mutexnery u free mallocs need a functon
                 return (1);
             }
         print_params(params);

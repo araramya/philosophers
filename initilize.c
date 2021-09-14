@@ -31,6 +31,7 @@ int ft_initilize_philo(t_params  *params)
         params->philo[i].left_fork = i;
         params->philo[i].right_fork = (i + 1) % params->philo_num;
         params->philo[i].eat_c = 0;
+        //params->philo[i].params = params;
         pthread_mutex_init(&params->philo[i].mutex, NULL);
         i++;
     }
@@ -44,11 +45,17 @@ int ft_initilize_mutex(t_params *params)
     i = 0;
     params->forks = malloc(sizeof(pthread_mutex_t) * params->philo_num);
     if(!params->forks)
+    {
+        printf("ERROR! :mutex malloc:\n");
         return (1);
+    }
     while (i < params->philo_num)
     {
         pthread_mutex_init(&params->forks[i], NULL);
         i++;
     }
+    pthread_mutex_init(&params->message, NULL);
+    pthread_mutex_init(&params->is_dead, NULL);
+    pthread_mutex_lock(&params->is_dead);
     return (0);
 }
