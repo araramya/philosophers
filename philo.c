@@ -27,6 +27,7 @@ void *ft_lav_mard_er(void *philo)
         usleep(100);
         pthread_mutex_unlock(&philip->mutex);
     }
+    return (NULL);
 }       
 
 
@@ -36,6 +37,13 @@ void *ft_philo_do(void *philo)
     t_philo *philip;
     philip = (t_philo *)philo;
     if(pthread_create(&tid, NULL, &ft_lav_mard_er, philo))
+        return ((void *)1 );
+    pthread_detach(tid);
+
+    while(1 && philip->eat_c != philip->params->at_last_eat)
+    {
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!EAT_FUNCTION
+    }
 }
 
 int ft_create_treads(t_params *params)
