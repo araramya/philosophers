@@ -29,6 +29,7 @@ typedef struct s_params
     int sleep_time;
     int at_last_eat;
     long long start;
+    int end;
     t_philo *philo;
     pthread_mutex_t *forks;
     pthread_mutex_t message;
@@ -43,4 +44,5 @@ int ft_initilize_philo(t_params  *params);
 int ft_initilize_mutex(t_params *params);
 void ft_destroy(t_params *params);
 long long ft_get_time(void);
+void ft_printik(t_philo *philo, char *str);
 #endif

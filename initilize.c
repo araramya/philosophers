@@ -13,6 +13,8 @@ int ft_initilize_params(t_params *params, int argc, char **argv)
     params->sleep_time = ft_atoi(argv[4]);
     params->philo = NULL;
     params->forks = NULL;
+    params->end = 0;
+    params->start = 0;
     params->philo = malloc(sizeof(t_philo) * params->philo_num);
      if(!(params->philo))
     {
@@ -31,7 +33,7 @@ int ft_initilize_philo(t_params  *params)
         params->philo[i].left_fork = i;
         params->philo[i].right_fork = (i + 1) % params->philo_num;
         params->philo[i].eat_c = 0;
-        //params->philo[i].params = params;
+        params->philo[i].params = params;
         pthread_mutex_init(&params->philo[i].mutex, NULL);
         i++;
     }
