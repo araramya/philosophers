@@ -1,7 +1,6 @@
 #ifndef PHILO_H
 #define PHILO_H
 
-
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -39,9 +38,9 @@ typedef struct s_params
 }              t_params;
 
 long	ft_atoi(const char *str);
-//int ft_initilize_params(t_params *params, int argc, char **argv);
-//int ft_initilize_philo(t_params  *params);
-//int ft_initilize_mutex(t_params *params);
+int ft_initilize_params(t_params *params, int argc, char **argv);
+int ft_initilize_philo(t_params  *params);
+int ft_initilize_mutex(t_params *params);
 int ft_initilize(t_params *params, int argc, char **argv);
 void ft_destroy(t_params *params);
 long long ft_get_time(void);

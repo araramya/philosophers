@@ -38,14 +38,13 @@ long long ft_get_time(void)
 {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    //printf("get_time \n");
-    return (tv.tv_sec * 1000 + tv.tv_usec / 1000); //why ?
+    return (tv.tv_sec * 1000 + tv.tv_usec/1000);
 }
 
 void ft_printik(t_philo *philo, char *str)
 {
     pthread_mutex_lock(&philo->params->message);
     printf("%lld %d %s\n", (ft_get_time() - philo->params->start), philo->index, str);
-    if(*str != 'd')
+    if(*str != 'D')
         pthread_mutex_unlock(&philo->params->message);
 }

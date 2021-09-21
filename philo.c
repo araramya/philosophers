@@ -1,12 +1,12 @@
 #include "philo.h"
-void print_params(t_params *params)
-{
-    printf("philo_num_______%d\n", params->philo_num);
-    printf("die_time_______%d\n", params->die_time);
-    printf("eat_time________%d\n", params->eat_time);
-    printf("sleep_time_______%d\n", params->sleep_time);
-    printf("at_last_eat_______%d\n", params->at_last_eat);
-}
+// void print_params(t_params *params)
+// {
+//     printf("philo_num_______%d\n", params->philo_num);
+//     printf("die_time_______%d\n", params->die_time);
+//     printf("eat_time________%d\n", params->eat_time);
+//     printf("sleep_time_______%d\n", params->sleep_time);
+//     printf("at_last_eat_______%d\n", params->at_last_eat);
+// }
 void *ft_lav_mard_er(void *philo)
 {
     t_philo *philip;
@@ -100,70 +100,70 @@ int ft_create_threads(t_params *params)
 }
 int main(int argc, char **argv)
 {
-    t_params *params;
-    if(argc != 5 && argc != 6)
-        {
-            printf("ERROR :ARGUMENTS COUNT IS WRONG :\n");
-            return (1);
-        }
-    printf("hi\n");
-    if(ft_atoi(argv[1]) == 1)
-        {
-            printf("0 1 DEAD :(\n");
-            return (0);
-        }
-    params = malloc(sizeof(t_params));
-    if(!params)
-        return (1);
-    if(ft_initilize(params, argc, argv))
-        {
-            ft_destroy(params);
-            return (1);
-        }
-    if(ft_create_threads(params))
-        {
-            ft_destroy(params);
-            return (1);
-        }
-    pthread_mutex_lock(&(params->is_dead));
-    return (0);
-
-    // if(argc == 5 || argc == 6)
-    // {
-    //     t_params *params;
-    //     if(ft_atoi(argv[1]) == 1)
+    // t_params *params;
+    // if(argc != 5 && argc != 6)
+    //     {
+    //         printf("ERROR :ARGUMENTS COUNT IS WRONG :\n");
+    //         return (1);
+    //     }
+    // printf("hi\n");
+    // if(ft_atoi(argv[1]) == 1)
     //     {
     //         printf("0 1 DEAD :(\n");
     //         return (0);
     //     }
-    //     params = malloc(sizeof(t_params));
-    //     if(!params)
+    // params = malloc(sizeof(t_params));
+    // if(!params)
+    //     return (1);
+    // if(ft_initilize(params, argc, argv))
     //     {
-    //         printf("ERROR!  :malloc params failed: \n");
-    //         return(1);
-    //     }
-    //     if(ft_initilize(params, argc, argv))
-    //         {
-    //             printf("ERROR! :Initalization failed:");
-    //             //destroy mutexnery u free mallocs need a functon !DONE!
-    //             ft_destroy(params);
-    //             return (1);
-    //         }
-    //    // printf("NONONO\n");
-    //     if(ft_create_treads(params))
-    //     {
-    //         printf("ERROR! :Creation threads:\n");
     //         ft_destroy(params);
     //         return (1);
     //     }
-    //     pthread_mutex_lock(&(params->is_dead));
-    //      //   print_params(params);
-    // }
+    // if(ft_create_threads(params))
+    //     {
+    //         ft_destroy(params);
+    //         return (1);
+    //     }
+    // pthread_mutex_lock(&(params->is_dead));
+    // return (0);
+
+    if(argc == 5 || argc == 6)
+    {
+        t_params *params;
+        if(ft_atoi(argv[1]) == 1)
+        {
+            printf("0 1 DEAD :(\n");
+            return (0);
+        }
+        params = malloc(sizeof(t_params));
+        if(!params)
+        {
+            printf("ERROR!  :malloc params failed: \n");
+            return(1);
+        }
+        if(ft_initilize_params(params, argc, argv) || ft_initilize_mutex(params) || ft_initilize_philo(params))
+            {
+                printf("ERROR! :Initalization failed:");
+                //destroy mutexnery u free mallocs need a functon !DONE!
+                ft_destroy(params);
+                return (1);
+            }
+       // printf("NONONO\n");
+        if(ft_create_threads(params))
+        {
+            printf("ERROR! :Creation threads:\n");
+            ft_destroy(params);
+            return (1);
+        }
+        pthread_mutex_lock(&(params->is_dead));
+         //   print_params(params);
+    }
 
 
-    // else
-    // {
-    //     printf ("ERROR! :Wrong Number of arguments: \n");
-    //     return (1);
-    // }   
+    else
+    {
+        printf ("ERROR! :Wrong Number of arguments: \n");
+        return (1);
+    }   
 }
