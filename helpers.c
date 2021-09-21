@@ -21,6 +21,19 @@ void ft_destroy(t_params *params)
     
 }
 
+int ft_is_digit(char *s)
+{
+    int i;
+    i = 0;
+    while(s[i])
+    {
+        if(s[i] < '0' || s[i] > '9')
+            return (1);
+        i++;
+    }
+    return (0);
+}
+
 long long ft_get_time(void)
 {
     struct timeval tv;

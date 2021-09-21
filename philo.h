@@ -39,10 +39,12 @@ typedef struct s_params
 }              t_params;
 
 long	ft_atoi(const char *str);
-int ft_initilize_params(t_params *params, int argc, char **argv);
-int ft_initilize_philo(t_params  *params);
-int ft_initilize_mutex(t_params *params);
+//int ft_initilize_params(t_params *params, int argc, char **argv);
+//int ft_initilize_philo(t_params  *params);
+//int ft_initilize_mutex(t_params *params);
+int ft_initilize(t_params *params, int argc, char **argv);
 void ft_destroy(t_params *params);
 long long ft_get_time(void);
 void ft_printik(t_philo *philo, char *str);
+int ft_is_digit(char *s);
 #endif

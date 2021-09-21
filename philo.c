@@ -24,7 +24,7 @@ void *ft_lav_mard_er(void *philo)
             pthread_mutex_unlock(&philip->params->is_dead);
             return ((void *)0);
         }
-        usleep(100);
+        usleep(1000);
         pthread_mutex_unlock(&philip->mutex);
     }
     return (NULL);
@@ -76,19 +76,20 @@ void *ft_philo_do(void *philo)
     return ((void *) 0);
 }
 
-int ft_create_treads(t_params *params)
+int ft_create_threads(t_params *params)
 {
     int i;
-    t_philo *philo;
+    t_philo *philip;
     pthread_t tid;
 
     i = 0;
-    philo = params->philo;
-    philo->params->start = ft_get_time();
-    printf("THREADS WAS DONE !\n");
+    philip = params->philo;
+    philip->params->start = ft_get_time();
+    //printf("THREADS WAS DONE !\n");
     while(i<params->philo_num)
     {
-        if(pthread_create(&tid, NULL, &ft_philo_do, &(philo[i])))
+        philip[i].last_eat = ft_get_time();
+        if(pthread_create(&tid, NULL, &ft_philo_do, &(philip[i])))
             return (1);
         pthread_detach(tid);
         i++;
@@ -99,36 +100,70 @@ int ft_create_treads(t_params *params)
 }
 int main(int argc, char **argv)
 {
-    if(argc == 5 || argc == 6)
-    {
-        t_params *params;
-        params = malloc(sizeof(t_params));
-        if(!params)
+    t_params *params;
+    if(argc != 5 && argc != 6)
         {
-            printf("ERROR!  :malloc params failed: \n");
-            return(1);
+            printf("ERROR :ARGUMENTS COUNT IS WRONG :\n");
+            return (1);
         }
-        if(ft_initilize_params(params, argc, argv) || ft_initilize_philo(params)
-            || ft_initilize_mutex(params))
-            {
-                printf("ERROR! :Initalization failed:");
-                //destroy mutexnery u free mallocs need a functon !DONE!
-                ft_destroy(params);
-                return (1);
-            }
-       // printf("NONONO\n");
-        if(ft_create_treads(params))
+    printf("hi\n");
+    if(ft_atoi(argv[1]) == 1)
         {
-            printf("ERROR! :Creation threads:\n");
+            printf("0 1 DEAD :(\n");
+            return (0);
+        }
+    params = malloc(sizeof(t_params));
+    if(!params)
+        return (1);
+    if(ft_initilize(params, argc, argv))
+        {
             ft_destroy(params);
             return (1);
         }
-         //   print_params(params);
-    }
+    if(ft_create_threads(params))
+        {
+            ft_destroy(params);
+            return (1);
+        }
+    pthread_mutex_lock(&(params->is_dead));
+    return (0);
 
-    else
-    {
-        printf ("ERROR! :Wrong Number of arguments: \n");
-        return (1);
-    }   
+    // if(argc == 5 || argc == 6)
+    // {
+    //     t_params *params;
+    //     if(ft_atoi(argv[1]) == 1)
+    //     {
+    //         printf("0 1 DEAD :(\n");
+    //         return (0);
+    //     }
+    //     params = malloc(sizeof(t_params));
+    //     if(!params)
+    //     {
+    //         printf("ERROR!  :malloc params failed: \n");
+    //         return(1);
+    //     }
+    //     if(ft_initilize(params, argc, argv))
+    //         {
+    //             printf("ERROR! :Initalization failed:");
+    //             //destroy mutexnery u free mallocs need a functon !DONE!
+    //             ft_destroy(params);
+    //             return (1);
+    //         }
+    //    // printf("NONONO\n");
+    //     if(ft_create_treads(params))
+    //     {
+    //         printf("ERROR! :Creation threads:\n");
+    //         ft_destroy(params);
+    //         return (1);
+    //     }
+    //     pthread_mutex_lock(&(params->is_dead));
+    //      //   print_params(params);
+    // }
+
+
+    // else
+    // {
+    //     printf ("ERROR! :Wrong Number of arguments: \n");
+    //     return (1);
+    // }   
 }
