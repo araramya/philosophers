@@ -73,7 +73,7 @@ void	*ft_philo_do(void *philo)
 	}
 	if (philip->params->end == philip->params->philo_num)
 	{
-		printf("SPAGETTI WAS DELICOS :)");
+		printf("SPAGETTI WAS DELICIOS :)");
 		ft_destroy(philip->params);
 		pthread_mutex_unlock(&philip->params->is_dead);
 	}

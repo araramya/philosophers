@@ -66,7 +66,7 @@ int	ft_initilize(t_params *params, int argc, char **argv)
 	params->die_time = ft_atoi(argv[2]);
 	params->eat_time = ft_atoi(argv[3]);
 	params->sleep_time = ft_atoi(argv[4]);
-	if (i == 6)
+	if (argc == 6)
 		params->at_last_eat = ft_atoi(argv[5]);
 	else
 		params->at_last_eat = -1;

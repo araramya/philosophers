@@ -47,5 +47,6 @@ int	main(int argc, char **argv)
 	if (for_mulya(params, argc, argv))
 		return (1);
 	pthread_mutex_lock(&(params->is_dead));
+	free(params);
 	return (0);
 }
